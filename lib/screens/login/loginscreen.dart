@@ -9,6 +9,19 @@ class MyLoginScreen extends StatefulWidget {
 }
 
 class _MyLoginScreenState extends State<MyLoginScreen> {
+  final _formkey = GlobalKey<FormState>();
+  TextEditingController phoneController = TextEditingController();
+  String selectedValue = "India";
+  List<String> country = [
+    "India",
+    "Itali",
+    "America",
+    "Srilanka",
+    "Afganistan",
+    "Dubai",
+    "Nepal",
+    "China",
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +32,7 @@ class _MyLoginScreenState extends State<MyLoginScreen> {
               SizedBox(height: 20),
               Uihelper.customText(
                 text: "Enter your phone number",
-                size: 16,
+                size: 18,
                 weight: FontWeight.w700,
                 family: "Inter",
                 color: Color.fromRGBO(0, 168, 132, 1),
@@ -47,6 +60,104 @@ class _MyLoginScreenState extends State<MyLoginScreen> {
                 weight: FontWeight.w400,
                 family: "Roboto",
                 color: Color.fromRGBO(0, 168, 132, 1),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 40, right: 40),
+                child: DropdownButtonFormField(
+                  items: country
+                      .map(
+                        (element) => DropdownMenuItem(
+                          value: element,
+                          child: Text(element),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (String? newvalue) {
+                    selectedValue = newvalue!;
+                  },
+                  initialValue: selectedValue,
+                  decoration: InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(0, 168, 132, 1),
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(0, 168, 132, 1),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 10),
+              Form(
+                key: _formkey,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 40,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: "+91",
+                          hintStyle: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontSize: 19,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "Roboto",
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromRGBO(0, 168, 132, 1),
+                            ),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromRGBO(0, 168, 132, 1),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    SizedBox(
+                      width: 172,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value?.isEmpty ?? true) {
+                            return "Please Enter Your Number";
+                          } else if (value!.length < 10) {
+                            return "Please Enter 10 digit Number";
+                          }
+                          return null;
+                        },
+                        keyboardType: TextInputType.number,
+                        controller: phoneController,
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromRGBO(0, 168, 132, 1),
+                            ),
+                          ),
+
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromRGBO(0, 168, 132, 1),
+                            ),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromRGBO(0, 168, 132, 1),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
