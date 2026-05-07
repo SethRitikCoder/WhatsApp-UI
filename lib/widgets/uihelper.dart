@@ -6,14 +6,15 @@ class Uihelper {
     required VoidCallback callback,
   }) {
     return SizedBox(
-      height: 42,
-      width: 320,
+      height: 39,
+      width: 280,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Color.fromRGBO(0, 168, 132, 1),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40),
           ),
+          elevation: 0.0,
         ),
         onPressed: () {
           callback();
@@ -44,6 +45,25 @@ class Uihelper {
         color: color ?? Color.fromRGBO(94, 94, 94, 1),
         fontWeight: weight ?? FontWeight.w400,
         fontFamily: family,
+      ),
+    );
+  }
+
+  static customContainer(TextEditingController controller) {
+    return Container(
+      height: 40,
+      width: 40,
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(217, 217, 217, 0.63),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextField(
+          keyboardType: TextInputType.number,
+          controller: controller,
+          decoration: InputDecoration(border: InputBorder.none),
+        ),
       ),
     );
   }
