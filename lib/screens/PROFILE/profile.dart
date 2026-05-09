@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:whatsapp_app/screens/HOME/homescreen.dart';
 import 'package:whatsapp_app/widgets/uihelper.dart';
 import 'dart:io';
 
@@ -62,7 +63,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             SizedBox(height: screenheight * 0.07),
 
             Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
@@ -110,9 +111,10 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       floatingActionButton: Uihelper.custombutton(
         buttonname: "Next",
         callback: () {
-
-           
-        
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyHomeScreen()),
+          );
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -158,21 +160,27 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   }
 
   Future<void> _imagepick(ImageSource imagesource) async {
-    try{ final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: imagesource);
-    if (image != null) {
-      setState(() {
-        _selectedImage = File(image.path);
-      });
-      if(mounted){  Navigator.pop(context);}
-    
-    }}
-    catch(e){
-      if(mounted){
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Failed to pick image: $e"),backgroundColor: Colors.red,duration: Duration(seconds: 3),),
-      );
-    }}
-   
+    try {
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: imagesource);
+      if (image != null) {
+        setState(() {
+          _selectedImage = File(image.path);
+        });
+        if (mounted) {
+          Navigator.pop(context);
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Failed to pick image: $e"),
+            backgroundColor: Colors.red,
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
+    }
   }
 }
