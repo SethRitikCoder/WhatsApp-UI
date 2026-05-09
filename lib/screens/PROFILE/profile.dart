@@ -111,7 +111,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       floatingActionButton: Uihelper.custombutton(
         buttonname: "Next",
         callback: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => MyHomeScreen()),
           );
@@ -139,16 +139,24 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
-                    onPressed: () {
-                      _imagepick(ImageSource.camera);
+                    iconSize: 80,
+                    onPressed: () async {
+                      Navigator.pop(context);
+                      await Future.delayed(Duration(milliseconds: 500), () {
+                        _imagepick(ImageSource.camera);
+                      });
                     },
-                    icon: Icon(Icons.camera_alt, size: 80, color: Colors.grey),
+                    icon: Icon(Icons.camera_alt, color: Colors.grey),
                   ),
                   IconButton(
-                    onPressed: () {
-                      _imagepick(ImageSource.gallery);
+                    iconSize: 80,
+                    onPressed: () async {
+                      Navigator.pop(context);
+                      await Future.delayed(Duration(milliseconds: 500), () {
+                        _imagepick(ImageSource.gallery);
+                      });
                     },
-                    icon: Icon(Icons.image, size: 80, color: Colors.grey),
+                    icon: Icon(Icons.image, color: Colors.grey),
                   ),
                 ],
               ),
@@ -167,9 +175,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         setState(() {
           _selectedImage = File(image.path);
         });
-        if (mounted) {
-          Navigator.pop(context);
-        }
       }
     } catch (e) {
       if (mounted) {

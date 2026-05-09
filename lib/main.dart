@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: false,
       ),
       themeMode: ThemeMode.system,
-      home: MyHomeScreen(),
+      home: MySplashScreen(),
     );
   }
 }
