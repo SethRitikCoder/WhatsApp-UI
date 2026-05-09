@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_app/screens/HOME/Call/call.dart';
 import 'package:whatsapp_app/screens/HOME/Camera/camera.dart';
 import 'package:whatsapp_app/screens/HOME/Chats/chats.dart';
+import 'package:whatsapp_app/screens/HOME/Contact/contact.dart';
 import 'package:whatsapp_app/screens/HOME/Status/status.dart';
 
 class MyHomeScreen extends StatefulWidget {
@@ -52,10 +53,18 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
             CallScreen(),
           ],
         ),
-        floatingActionButton: CircleAvatar(
-          radius: 24,
-          backgroundColor: Color.fromRGBO(0, 168, 132, 1),
-          child: Image.asset("assets/images/mode.png"),
+        floatingActionButton: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ContactScreen()),
+            );
+          },
+          child: CircleAvatar(
+            radius: 24,
+            backgroundColor: Color.fromRGBO(0, 168, 132, 1),
+            child: Image.asset("assets/images/mode.png"),
+          ),
         ),
       ),
     );

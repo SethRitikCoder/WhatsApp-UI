@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_app/screens/Chatdetailscreen/chatdetailscreen.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
@@ -97,6 +98,17 @@ class _ChatsScreenState extends State<ChatsScreen> {
         itemCount: arry.length,
         itemBuilder: (context, index) {
           return ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChatDetailScreen(
+                    imgurl: arry[index]["image"],
+                    name: arry[index]["name"],
+                  ),
+                ),
+              );
+            },
             leading: CircleAvatar(
               radius: 20,
               backgroundImage: NetworkImage(arry[index]["image"]),
