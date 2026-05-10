@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:whatsapp_app/screens/OTP/otpscreen.dart';
 import 'package:whatsapp_app/widgets/uihelper.dart';
 
@@ -102,6 +103,10 @@ class _MyLoginScreenState extends State<MyLoginScreen> {
                     SizedBox(
                       width: 40,
                       child: TextFormField(
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(10),
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
                         decoration: InputDecoration(
                           hintText: "+91",
                           hintStyle: TextStyle(
