@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Uihelper {
   static Widget custombutton({
@@ -49,7 +50,10 @@ class Uihelper {
     );
   }
 
-  static customContainer(TextEditingController controller) {
+  static customContainer(
+    TextEditingController controller,
+    BuildContext context,
+  ) {
     return Container(
       height: 40,
       width: 40,
@@ -60,7 +64,18 @@ class Uihelper {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextField(
+          onChanged: (value) {
+            if (value.length == 1) {
+              FocusScope.of(context).nextFocus();
+            }
+          },
           keyboardType: TextInputType.number,
+          textAlign: TextAlign.center,
+          // maxLength: 1,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(1),
+            FilteringTextInputFormatter.digitsOnly,
+          ],
           controller: controller,
           decoration: InputDecoration(border: InputBorder.none),
         ),
